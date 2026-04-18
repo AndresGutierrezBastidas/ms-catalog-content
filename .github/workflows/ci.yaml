@@ -1,5 +1,5 @@
 
-name: CI Security
+name: CI
 
 on:
   workflow_call:
@@ -13,7 +13,7 @@ jobs:
   
   Build:
     runs-on: ubuntu-latest
-    name: Static Application Security Testing
+    name: Build
     steps:   
     
       - name: Git Clone
