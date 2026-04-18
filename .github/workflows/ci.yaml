@@ -50,7 +50,7 @@ jobs:
           
   Docker-push:
     needs: 
-      - Container-Analysis
+      - Docker-build
     runs-on: ubuntu-latest
     steps:
     
