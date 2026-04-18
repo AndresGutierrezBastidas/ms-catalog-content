@@ -1,0 +1,60 @@
+
+name: CI Security
+
+on:
+  workflow_call:
+permissions:
+  security-events: write
+  packages: read
+  actions: read
+  contents: read
+jobs:
+  
+  Build:
+    runs-on: ubuntu-latest
+    name: Static Application Security Testing
+    steps:   
+    
+      - name: Git Clone
+        uses: actions/checkout@v4
+      
+      - name: Set Up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Mvn compile
+        run: |
+          mvn -q -DskipTests package
+                    
+  Docker-build:
+    name: Build Docker Image
+    needs: 
+      - Build
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Docker Auth
+        run: |
+          echo "Docker login"
+
+      - name: Docker Config
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Construccion Imagen
+        run: | 
+          #docker build -t clagosu/ms-aumento-voto:latest .
+          echo "Docker build"
+
+          
+  Docker-push:
+    needs: 
+      - Container-Analysis
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Docker push
+        run: |
+          echo "Docker push"
+  
