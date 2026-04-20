@@ -72,4 +72,14 @@ jobs:
       - name: Docker push
         run: |
           echo "Docker push"
+
+  Deploy:
+    needs: 
+      - Docker-push
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Docker push
+        run: |
+          echo "Deploy"
   
