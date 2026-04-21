@@ -81,5 +81,5 @@ jobs:
     
       - name: Docker push
         run: |
-          echo "Deploy"
+          kubectl apply ./deploy
   
