@@ -17,5 +17,16 @@ jobs:
       # Runs a single command using the runners shell
       - uses: actions/checkout@v4
       
-      - name: Run a one-line script
-        run: ls ${{github.workspace}}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java-kotlin
+          build-mode: none
+          queries: security-and quality
+          
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:java-kotlin"
+      
+      
