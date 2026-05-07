@@ -29,28 +29,28 @@ jobs:
         with:
           category: "/language:java-kotlin"
   SCA:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: |
-        mvn package
-    - name: Dependency Check
-      # You may pin to the exact commit or the version.
-      # uses: dependency-check/Dependency-Check_Action@75ba02d6183445fe0761d26e836bde58b1560600
-      uses: dependency-check/Dependency-Check_Action@1.1.0
-      with:
-        # 
-        project: 'ms-catalog-content' 
-        path: '.'
-        format: 'HTML'
-        args: >
-          --disableCentral
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@7.0.1
-      with:
-        path: ${{github.workspace}}/reports
-              
-          
-          
-          
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mvn package
+
+      - name: Dependency Check
+        uses: dependency-check/Dependency-Check_Action@1.1.0
+        with:
+          project: 'ms-catalog-content'
+          path: '.'
+          format: 'HTML'
+          args: >
+            --disableCentral
+            
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v7.0.1
+        with: 
+          path: ${{github.workspace}}/reports
+
+ 
