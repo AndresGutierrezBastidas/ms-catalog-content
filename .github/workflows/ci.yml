@@ -52,5 +52,13 @@ jobs:
         uses: actions/upload-artifact@v7.0.1
         with: 
           path: ${{github.workspace}}/reports
+  
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          username: ${{ secrets.USER_DOCKER }}
+          password: ${{ secrets.PASS_DOCKER }}
 
- 
+          
