@@ -57,9 +57,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name : Docker login
+        uses: docker/login-action@v4.1.0
         with:
           username: ${{ secrets.USER_DOCKER }}
           password: ${{ secrets.PASS_DOCKER }}
+      - name : Docker build
+        run: |
+          docker build --tag andresbastidasgutierrez/ms-catalog-content-clases:lastes .
+      - name : Docker push
+        run: |
+          docker push andresbastidasgutierrez/ms-catalog-content-clases:lastes
+    
           
 
       
